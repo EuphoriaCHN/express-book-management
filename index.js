@@ -24,5 +24,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// 托管静态文件与虚拟路径
+app.use('/www', express.static('public'));
+
 // 设置路由与监听端口
 app.use(router).listen(3000, () => console.log('Running...'));

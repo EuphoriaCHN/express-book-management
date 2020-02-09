@@ -5,8 +5,10 @@
 const express = require('express');
 const router = express.Router();
 
-const service = require('./controller/controller');
+const apis = require('./controller/controller');
 
-router.get('/', service.showIndex);
+router.get('/', apis.showIndex);
+router.get('/toaddbook', apis.showAddBook);
+router.post('/addbook', apis.addBook);
 
 module.exports = router;
