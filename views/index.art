@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="statics/css/index.css" />
+</head>
+<body>
+<div class="title">图书管理系统 <a href="#">添加图书</a></div>
+<div class="content">
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>作者</th>
+            <th>分类</th>
+            <th>描述</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>西游记</td>
+            <td>吴承恩</td>
+            <td>文学</td>
+            <td>佛教与道教的斗争</td>
+            <td><a href="#">编辑</a>|<a href="#">删除</a></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>西游记</td>
+            <td>吴承恩</td>
+            <td>文学</td>
+            <td>佛教与道教的斗争</td>
+            <td><a href="#">编辑</a>|<a href="#">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
