@@ -42,6 +42,36 @@ const apis = {
             }
             res.redirect('/');
         });
+    },
+    // 跳转至修改图书信息页面
+    toModifyBook(req, res) {
+        let id = req.query.id;
+        let book = null;
+        model.forEach(value => {
+            if (value.id === id) {
+                book = value;
+                return;
+            }
+        });
+        res.render('editbook', book);
+    },
+    // 修改图书信息
+    modifyBook(req, res) {
+        let info = req.body;
+
+        model.forEach((value, index) => {
+            if (value.id === info.id) {
+                model[index] = info;
+                return;
+            }
+        });
+
+        fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
+            if (err) {
+                res.send('Server Error');
+            }
+            res.redirect('/');
+        });
     }
 };
 

@@ -10,5 +10,7 @@ const apis = require('./controller/controller');
 router.get('/', apis.showIndex);
 router.get('/toaddbook', apis.showAddBook);
 router.post('/addbook', apis.addBook);
+router.get('/tomodifybook', apis.toModifyBook);
+router.post('/modifybook', apis.modifyBook);
 
 module.exports = router;
