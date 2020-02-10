@@ -3,6 +3,10 @@ const express = require('express');
 const apis = require('./controller/controller');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.redirect('/www/index.html');
+});
+
 // 提供所有的图书信息
 router.get('/books',apis.allBooks);
 // 添加图书信息时提交数据
