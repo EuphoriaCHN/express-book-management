@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const model = require('../data.json');
+const db = require('./database/db').db;
 
 // 生成当前图书自增编号
 let maxBookCode = () => {
@@ -26,6 +27,54 @@ let writeDataToFile = res => {
 };
 
 const apis = {
+    // 展示主页
+    showIndex(req, res) {
+        db('select * from books', result => {
+            res.render('index', {bookList: result});
+        });
+    },
+    // 跳转到“添加图书”页面
+    showAddBook(req, res) {
+        res.render('addbook', {});
+    },
+    // 添加图书方法
+    addBook(req, res) {
+        let book = req.body;
+        db('insert into books set ?', book, result => {
+            if (result.affectedRows === 1) {
+                // 影响了一行
+                res.redirect('/');
+            }
+        });
+    },
+    // 跳转至修改图书信息页面
+    toModifyBook(req, res) {
+        let id = req.query.id;
+        db('select * from books where id = ?', [id], result => {
+            res.render('editbook', result[0]);
+        });
+    },
+    // 修改图书信息
+    modifyBook(req, res) {
+        let info = Object.values(req.body);
+        info.push(info.shift());
+        db('update books set name = ?, author = ?, category = ?, description = ? where id = ?',
+            info,
+            () => {
+                res.redirect('/');
+            }
+        );
+    },
+    // 删除图书信息
+    deleteBook(req, res) {
+        let id = req.query.id;
+        db('delete from books where id = ?', [id], () => {
+            res.redirect('/');
+        });
+    }
+};
+
+const apisWithoutDB = {
     // 展示主页
     showIndex(req, res) {
         res.render('index', {
