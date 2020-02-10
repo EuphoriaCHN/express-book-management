@@ -62,7 +62,14 @@
                     });
                     td.find('a:eq(1)').on('click', function () {
                         // 删除
-                        console.log(2);
+                        $.ajax({
+                            type: 'delete',
+                            dataType: 'json',
+                            url: '/books/book/' + bookId,
+                            success(res) {
+                                initList();
+                            }
+                        });
                     });
                 });
             });
