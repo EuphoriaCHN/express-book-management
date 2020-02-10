@@ -15,6 +15,16 @@ let maxBookCode = () => {
     return Math.max.apply(null, arr);
 };
 
+// 将当前模型写入文件
+let writeDataToFile = res => {
+    fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
+        if (err) {
+            res.send('Server Error');
+        }
+        res.redirect('/');
+    });
+};
+
 const apis = {
     // 展示主页
     showIndex(req, res) {
@@ -35,13 +45,7 @@ const apis = {
             book[key] = info[key];
         }
         model.push(book);
-
-        fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
-            if (err) {
-                res.send('Server Error');
-            }
-            res.redirect('/');
-        });
+        writeDataToFile(res);
     },
     // 跳转至修改图书信息页面
     toModifyBook(req, res) {
@@ -65,13 +69,7 @@ const apis = {
                 return;
             }
         });
-
-        fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
-            if (err) {
-                res.send('Server Error');
-            }
-            res.redirect('/');
-        });
+        writeDataToFile(res);
     },
     // 删除图书信息
     deleteBook(req, res) {
@@ -82,12 +80,7 @@ const apis = {
                 return;
             }
         });
-        fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
-            if (err) {
-                res.send('Server Error');
-            }
-            res.redirect('/');
-        });
+        writeDataToFile(res);
     }
 };
 
