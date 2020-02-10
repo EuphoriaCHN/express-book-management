@@ -25,4 +25,15 @@
 .content td {
   border-top: 1px solid orange;
 }
+.form {
+  display: none;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  top: 100px;
+}
 /*# sourceMappingURL=index.css.map */

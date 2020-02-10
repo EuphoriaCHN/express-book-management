@@ -1,3 +1,14 @@
+// START --- 混入 ---
+.absoluteCenter() {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+// END --- 混入 ---
+
 .title {
   text-align: center;
   background-color: lightgreen;
@@ -23,4 +34,11 @@
   td {
     border-top: 1px solid orange;
   }
+}
+
+.form {
+  display: none;
+  position: absolute;
+  .absoluteCenter;
+  top: 100px;
 }
