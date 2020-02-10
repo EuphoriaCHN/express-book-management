@@ -12,5 +12,6 @@ router.get('/toaddbook', apis.showAddBook);
 router.post('/addbook', apis.addBook);
 router.get('/tomodifybook', apis.toModifyBook);
 router.post('/modifybook', apis.modifyBook);
+router.get('/deletebook', apis.deleteBook);
 
 module.exports = router;

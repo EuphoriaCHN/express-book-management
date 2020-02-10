@@ -72,6 +72,22 @@ const apis = {
             }
             res.redirect('/');
         });
+    },
+    // 删除图书信息
+    deleteBook(req, res) {
+        let id = req.query.id;
+        model.forEach((value, index) => {
+            if (value.id + '' === id + '') {
+                model.splice(index, 1);
+                return;
+            }
+        });
+        fs.writeFile(path.join(__dirname, '../data.json'), JSON.stringify(model, null, 4), err => {
+            if (err) {
+                res.send('Server Error');
+            }
+            res.redirect('/');
+        });
     }
 };
 
