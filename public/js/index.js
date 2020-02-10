@@ -2,16 +2,69 @@
     function initList() {
         $(function () {
             // 渲染列表数据
-            $.ajax({
-                type: 'get',
-                url: '/books',
-                dataType: 'json',
-                success(res) {
-                    let html = template('indexTpl', {
-                        list: res
+            new Promise(resolve => {
+                $.ajax({
+                    type: 'get',
+                    url: '/books',
+                    dataType: 'json',
+                    success(res) {
+                        resolve(res);
+                    }
+                });
+            }).then(value => {
+                let html = template('indexTpl', {
+                    list: value
+                });
+                let dataList = $('#dataList');
+                dataList.html(html);
+
+                // 必须在渲染结束后才可以操作 DOM 标签
+                dataList.find('tr').each((index, element) => {
+                    let td = $(element).find('td:last-child');
+                    let bookId = $(element).find('td:first-child').text();
+                    td.find('a:eq(0)').on('click', function () {
+                        new Promise(resolve => {
+                            // 编辑
+                            $.ajax({
+                                type: 'get',
+                                url: '/books/book/' + bookId,
+                                dataType: 'json',
+                                success(res) {
+                                    resolve(res);
+                                }
+                            });
+                        }).then(value => {
+                            let editBookHTML = template('indexTpl', {
+                                editData: value,
+                            });
+
+                            let dialog = new MarkBox(600, 400, '编辑图书', $(editBookHTML).get(0));
+                            dialog.init();
+
+                            $('#editBookSubmit').on('click', function () {
+                                $.ajax({
+                                    type: 'put',
+                                    url: '/books/book',
+                                    data: $('#editBook').serialize(),
+                                    dataType: 'json',
+                                    success(res) {
+                                        console.log(res);
+                                        if (res.flag === 1) {
+                                            dialog.close();
+                                            initList();
+                                        } else {
+                                            console.error('Server Error');
+                                        }
+                                    }
+                                });
+                            });
+                        });
                     });
-                    $('#dataList').html(html);
-                }
+                    td.find('a:eq(1)').on('click', function () {
+                        // 删除
+                        console.log(2);
+                    });
+                });
             });
         });
     }

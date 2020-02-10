@@ -35,7 +35,7 @@ const apis = {
     },
     // 编辑图书
     editBook(req, res) {
-        let info = req.body;
+        let info = Object.values(req.body);
         info.push(info.shift());
         db('update books set name = ?, author = ?, category = ?, description = ? where id = ?',
             info,
