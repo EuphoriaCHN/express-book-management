@@ -10,10 +10,10 @@ exports.db = function (sql, data, callback) {
         data = undefined;
     }
     const connection = mysql.createConnection({
-        host: 'your_host',
-        user: 'your_db_account',
-        password: 'your_db_password',
-        database: 'your_db_name'
+        host: 'localhost',
+        user: 'root',
+        password: '610106',
+        database: 'express_book_management_system'
     });
 
     connection.connect();
